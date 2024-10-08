@@ -10,5 +10,5 @@ SELECT
   observation_period_start_date,
   observation_period_end_date
 FROM (
-  @get_observation_period(gold.drug_exposure, drug_exposure_start_date, drug_exposure_start_date)
+  @get_observation_period(@schema_dest.drug_exposure, drug_exposure_start_date, drug_exposure_start_date)
 )

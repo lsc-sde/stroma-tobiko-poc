@@ -10,5 +10,5 @@ SELECT
   observation_period_start_date,
   observation_period_end_date
 FROM (
-  @get_observation_period(gold.measurement, measurement_date, measurement_date)
+  @get_observation_period(@schema_dest.measurement, measurement_date, measurement_date)
 )

@@ -9,49 +9,49 @@ SELECT DISTINCT
 FROM (
   SELECT
     person_id
-  FROM silvermeasurement
+  FROM @schema_src.measurement
   WHERE
     measurement_date >= @minimum_observation_period_start_date
   UNION
   SELECT
     person_id
-  FROM silverobservation
+  FROM @schema_src.observation
   WHERE
     observation_date >= @minimum_observation_period_start_date
   UNION
   SELECT
     person_id
-  FROM silvercondition_occurrence
+  FROM @schema_src.condition_occurrence
   WHERE
     condition_start_date >= @minimum_observation_period_start_date
   UNION
   SELECT
     person_id
-  FROM silverprocedure_occurrence
+  FROM @schema_src.procedure_occurrence
   WHERE
     procedure_date >= @minimum_observation_period_start_date
   UNION
   SELECT
     person_id
-  FROM silverdrug_exposure
+  FROM @schema_src.drug_exposure
   WHERE
     drug_exposure_start_date >= @minimum_observation_period_start_date
   UNION
   SELECT
     person_id
-  FROM silverdevice_exposure
+  FROM @schema_src.device_exposure
   WHERE
     device_exposure_start_date >= @minimum_observation_period_start_date
   UNION
   SELECT
     person_id
-  FROM silvervisit_occurrence
+  FROM @schema_src.visit_occurrence
   WHERE
     visit_start_date >= @minimum_observation_period_start_date
   UNION
   SELECT
     person_id
-  FROM silverspecimen
+  FROM @schema_src.specimen
   WHERE
     specimen_date >= @minimum_observation_period_start_date
 )

@@ -37,8 +37,8 @@ WITH gold_visits AS (
     vo.discharged_to_concept_id,
     vo.discharged_to_source_value,
     vo.preceding_visit_occurrence_id
-  FROM silvervisit_occurrence AS vo
-  LEFT JOIN silverdeath AS d
+  FROM @schema_src.visit_occurrence AS vo
+  LEFT JOIN @schema_src.death AS d
     ON vo.person_id = d.person_id
 )
 SELECT

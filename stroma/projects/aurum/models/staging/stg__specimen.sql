@@ -20,7 +20,7 @@ SELECT
   sp.unit_source_value,
   sp.anatomic_site_source_value,
   sp.disease_status_source_value
-FROM silverspecimen AS sp
+FROM @schema_src.specimen AS sp
 INNER JOIN @schema_stg.stg__person AS p
   ON sp.person_id = p.person_id
 WHERE

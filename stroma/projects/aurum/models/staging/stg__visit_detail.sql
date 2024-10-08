@@ -23,7 +23,7 @@ SELECT
   lag(vd.visit_detail_id) OVER (PARTITION BY vd.person_id ORDER BY vd.visit_detail_start_datetime) AS preceding_visit_detail_id,
   vd.parent_visit_detail_id,
   vd.visit_occurrence_id
-FROM silvervisit_detail AS vd
+FROM @schema_src.visit_detail AS vd
 INNER JOIN @schema_stg.stg__person AS p
   ON vd.person_id = p.person_id
 LEFT JOIN @schema_stg.stg__death AS d

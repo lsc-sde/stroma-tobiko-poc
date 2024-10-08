@@ -1,5 +1,5 @@
 MODEL (
-  name gold.domain,
+  name @schema_dest.domain,
   kind VIEW,
   cron '@yearly'
 );

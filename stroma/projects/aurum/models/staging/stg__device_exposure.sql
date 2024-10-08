@@ -24,7 +24,7 @@ SELECT
   de.unit_concept_id,
   de.unit_source_value,
   de.unit_source_concept_id
-FROM silverdevice_exposure AS de
+FROM @schema_src.device_exposure AS de
 INNER JOIN @schema_stg.stg__person AS p
   ON de.person_id = p.person_id
 INNER JOIN @schema_stg.stg__visit_occurrence AS vo

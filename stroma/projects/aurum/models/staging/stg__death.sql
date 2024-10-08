@@ -12,7 +12,7 @@ SELECT
   d.cause_concept_id,
   d.cause_source_value,
   d.cause_source_concept_id
-FROM silverdeath AS d
+FROM @schema_src.death AS d
 INNER JOIN @schema_stg.stg__person AS p
   ON d.person_id = p.person_id
 WHERE

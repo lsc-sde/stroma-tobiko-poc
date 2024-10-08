@@ -1,5 +1,5 @@
 MODEL (
-  name gold.concept,
+  name @schema_dest.concept,
   kind VIEW,
   cron '@yearly'
 );

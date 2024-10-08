@@ -22,7 +22,7 @@ SELECT
   co.condition_source_value,
   co.condition_source_concept_id,
   co.condition_status_source_value
-FROM silvercondition_occurrence AS co
+FROM @schema_src.condition_occurrence AS co
 INNER JOIN @schema_stg.stg__person AS p
   ON co.person_id = p.person_id
 INNER JOIN @schema_stg.stg__visit_occurrence AS vo

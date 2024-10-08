@@ -21,7 +21,7 @@ SELECT
   po.procedure_source_value,
   po.procedure_source_concept_id,
   po.modifier_source_value
-FROM silverprocedure_occurrence AS po
+FROM @schema_src.procedure_occurrence AS po
 INNER JOIN @schema_stg.stg__person AS p
   ON po.person_id = p.person_id
 INNER JOIN @schema_stg.stg__visit_occurrence AS vo

@@ -24,7 +24,7 @@ SELECT
   p.race_source_concept_id,
   p.ethnicity_source_value,
   p.ethnicity_source_concept_id
-FROM silverperson AS p
+FROM @schema_src.person AS p
 WHERE
   EXISTS(
     SELECT
@@ -35,7 +35,7 @@ WHERE
   )
   AND p.person_id NOT in (
     SELECT o.person_id
-    FROM silverobservation AS o
+    FROM @schema_src.observation AS o
     WHERE
       o.observation_concept_id = 44787910
   )
