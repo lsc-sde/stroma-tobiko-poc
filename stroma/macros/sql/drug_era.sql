@@ -15,7 +15,7 @@ with ctePreDrugTarget as (
       nullif(drug_exposure_end_date, NULL),
       ---If drug_exposure_end_date != NULL, return drug_exposure_end_date, otherwise go to next case
       nullif(
-        date_add(drug_exposure_start_date, interval (d.days_supply) day),
+        drug_exposure_start_date + interval (d.days_supply) day,
         drug_exposure_start_date
       ),
       ---If days_supply != NULL or 0, return drug_exposure_start_date + days_supply, otherwise go to next case
@@ -200,7 +200,7 @@ cteEndDates (person_id, ingredient_concept_id, end_date) as (
         select
           person_id,
           ingredient_concept_id,
-          date_add(drug_sub_exposure_end_date, interval 30 day) as event_date,
+          (drug_sub_exposure_end_date + interval 30 day) as event_date,
           1 as event_type,
           NULL
         from cteFinalTarget
