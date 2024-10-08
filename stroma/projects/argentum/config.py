@@ -9,11 +9,12 @@ from stroma.settings import (
     EnumMedallionLayer,
 )
 
-layer = EnumMedallionLayer.SILVER
+source_layer = EnumMedallionLayer.BRONZE
+target_layer = EnumMedallionLayer.SILVER
 
 cfg_cdm_source = CdmSourceSettings(
-    cdm_source_name="IDRIL-1-" + layer.upper(),
-    cdm_source_abbreviation="IDRIL-1-" + layer.upper(),
+    cdm_source_name="IDRIL-1-" + target_layer.upper(),
+    cdm_source_abbreviation="IDRIL-1-" + target_layer.upper(),
 )
 settings = {
     "cfg_visit_occurrence": {"start_date": "2018-01-01"},
@@ -22,12 +23,11 @@ settings = {
 
 
 variables = OMOPSettings(
-    layer=layer,
-    schema_src=EnumMedallionLayer.BRONZE,
+    layer=target_layer,
+    schema_src=source_layer,
     settings={},
 ).model_dump(mode="json")
 
 
 variables.update({"global_start_date": "2005-01-01"})
-config = Config(**dict(SQLMeshSettings(project=layer, variables=variables)))
-# print(config)
+config = Config(**dict(SQLMeshSettings(project=target_layer, variables=variables)))
