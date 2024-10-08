@@ -1,5 +1,5 @@
 MODEL (
-  name gold.observation,
+  name @schema_dest.observation,
   kind FULL,
   cron '@monthly',
   grain observation_id,
@@ -27,8 +27,6 @@ SELECT
   o.qualifier_source_value,
   o.value_source_value,
   o.observation_event_id,
-  o.obs_event_field_concept_id,
-  o.unique_key,
-  o.datasource,
-  o.updated_at
-FROM @schema_staging.stg__observation AS o
+  o.obs_event_field_concept_id
+/* o.unique_key, */ /* o.datasource, */ /* o.updated_at */
+FROM @schema_src.observation AS o

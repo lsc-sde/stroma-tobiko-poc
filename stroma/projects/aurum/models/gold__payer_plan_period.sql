@@ -1,5 +1,5 @@
 MODEL (
-  name gold.payer_plan_period,
+  name @schema_dest.payer_plan_period,
   kind FULL,
   cron '@monthly',
   grain payer_plan_period_id,
@@ -24,4 +24,4 @@ SELECT
   stop_reason_concept_id,
   stop_reason_source_value,
   stop_reason_source_concept_id
-FROM silverpayer_plan_period
+FROM @schema_src.payer_plan_period

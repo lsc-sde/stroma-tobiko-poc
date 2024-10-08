@@ -1,5 +1,5 @@
 MODEL (
-  name gold.cost,
+  name @schema_dest.cost,
   kind FULL,
   cron '@monthly',
   grain cost_id,
@@ -29,4 +29,4 @@ SELECT
   revenue_code_source_value,
   drg_concept_id,
   drg_source_value
-FROM silvercost
+FROM @schema_src.cost

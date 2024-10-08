@@ -1,5 +1,5 @@
 MODEL (
-  name gold.observation_period,
+  name @schema_dest.observation_period,
   kind FULL,
   cron '@monthly',
   grain observation_period_id,
@@ -12,4 +12,4 @@ SELECT
   observation_period_start_date,
   observation_period_end_date,
   32817 AS period_type_concept_id
-FROM @schema_staging.stg__observation_period
+FROM @schema_src.observation_period

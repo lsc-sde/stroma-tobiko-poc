@@ -1,5 +1,5 @@
 MODEL (
-  name gold.condition_occurrence,
+  name @schema_dest.condition_occurrence,
   kind FULL,
   cron '@monthly',
   grain condition_occurrence_id
@@ -22,4 +22,6 @@ SELECT
   co.condition_source_value,
   co.condition_source_concept_id,
   co.condition_status_source_value
-FROM @schema_staging.stg__condition_occurrence AS co
+FROM @schema_src.condition_occurrence AS co
+WHERE
+  co.condition_start_date >= '2015-01-01'

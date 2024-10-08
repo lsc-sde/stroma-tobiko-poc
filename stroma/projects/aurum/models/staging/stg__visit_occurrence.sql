@@ -1,5 +1,5 @@
 MODEL (
-  name @schema_staging.stg__visit_occurrence,
+  name @schema_stg.stg__visit_occurrence,
   kind FULL,
   cron '@monthly'
 );
@@ -60,9 +60,9 @@ SELECT
   vo.discharged_to_source_value,
   lag(vo.visit_occurrence_id) OVER (PARTITION BY vo.person_id ORDER BY vo.visit_start_datetime) AS preceding_visit_occurrence_id
 FROM gold_visits AS vo
-INNER JOIN @schema_staging.stg__person AS p
+INNER JOIN @schema_stg.stg__person AS p
   ON vo.person_id = p.person_id
-LEFT JOIN @schema_staging.stg__death AS d
+LEFT JOIN @schema_stg.stg__death AS d
   ON vo.person_id = d.person_id
 WHERE
   vo.visit_start_date >= p.birth_datetime::DATE

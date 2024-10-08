@@ -1,5 +1,5 @@
 MODEL (
-  name gold.specimen,
+  name @schema_dest.specimen,
   kind FULL,
   cron '@monthly',
   grain specimen_id,
@@ -22,4 +22,4 @@ SELECT
   s.unit_source_value,
   s.anatomic_site_source_value,
   s.disease_status_source_value
-FROM @schema_staging.stg__specimen AS s
+FROM @schema_src.specimen AS s

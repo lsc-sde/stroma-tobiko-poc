@@ -1,5 +1,5 @@
 MODEL (
-  name gold.procedure_occurrence,
+  name @schema_dest.procedure_occurrence,
   kind FULL,
   cron '@monthly',
   grain procedure_occurrence_id,
@@ -23,4 +23,4 @@ SELECT
   po.procedure_source_value,
   po.procedure_source_concept_id,
   po.modifier_source_value
-FROM @schema_staging.stg__procedure_occurrence AS po
+FROM @schema_src.procedure_occurrence AS po

@@ -1,5 +1,5 @@
 MODEL (
-  name @schema_staging.stg__measurement,
+  name @schema_stg.stg__measurement,
   kind VIEW,
   cron '@monthly'
 );
@@ -32,9 +32,9 @@ SELECT
   m.datasource,
   m.updated_at
 FROM silvermeasurement AS m
-INNER JOIN @schema_staging.stg__person AS p
+INNER JOIN @schema_stg.stg__person AS p
   ON m.person_id = p.person_id
-INNER JOIN @schema_staging.stg__visit_occurrence AS vo
+INNER JOIN @schema_stg.stg__visit_occurrence AS vo
   ON m.visit_occurrence_id = vo.visit_occurrence_id
 WHERE
   m.measurement_date >= p.birth_datetime::DATE

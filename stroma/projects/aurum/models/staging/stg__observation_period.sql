@@ -1,5 +1,5 @@
 MODEL (
-  name @schema_staging.stg__observation_period,
+  name @schema_stg.stg__observation_period,
   kind FULL,
   cron '@monthly'
 );

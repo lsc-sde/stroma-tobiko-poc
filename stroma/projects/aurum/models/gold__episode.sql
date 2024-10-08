@@ -1,5 +1,5 @@
 MODEL (
-  name gold.episode,
+  name @schema_dest.episode,
   kind FULL,
   cron '@monthly',
   physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb')
@@ -19,4 +19,4 @@ SELECT
   e.episode_type_concept_id,
   e.episode_source_value,
   e.episode_source_concept_id
-FROM silverepisode AS e
+FROM @schema_src.episode AS e

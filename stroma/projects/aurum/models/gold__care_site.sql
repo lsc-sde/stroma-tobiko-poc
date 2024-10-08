@@ -1,5 +1,5 @@
 MODEL (
-  name gold.care_site,
+  name @schema_dest.care_site,
   kind FULL,
   cron '@monthly',
   grain care_site_id,
@@ -22,4 +22,4 @@ SELECT
   cs.location_id,
   cs.care_site_source_value,
   cs.place_of_service_source_value
-FROM silvercare_site AS cs
+FROM @schema_src.care_site AS cs

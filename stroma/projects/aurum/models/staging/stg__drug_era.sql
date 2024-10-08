@@ -1,5 +1,5 @@
 MODEL (
-  name @schema_staging.stg__drug_era,
+  name @schema_stg.stg__drug_era,
   kind FULL,
   cron '@monthly'
 );
@@ -14,7 +14,7 @@ SELECT
   de.drug_exposure_count,
   de.gap_days
 FROM silverdrug_era AS de
-INNER JOIN @schema_staging.stg__person AS p
+INNER JOIN @schema_stg.stg__person AS p
   ON de.person_id = p.person_id
 WHERE
   de.drug_era_start_date::DATE >= p.birth_datetime::DATE

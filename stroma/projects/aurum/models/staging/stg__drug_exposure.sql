@@ -1,5 +1,5 @@
 MODEL (
-  name @schema_staging.stg__drug_exposure,
+  name @schema_stg.stg__drug_exposure,
   kind FULL,
   cron '@monthly'
 );
@@ -29,9 +29,9 @@ SELECT
   de.route_source_value,
   de.dose_unit_source_value
 FROM silverdrug_exposure AS de
-INNER JOIN @schema_staging.stg__person AS p
+INNER JOIN @schema_stg.stg__person AS p
   ON de.person_id = p.person_id
-INNER JOIN @schema_staging.stg__visit_occurrence AS vo
+INNER JOIN @schema_stg.stg__visit_occurrence AS vo
   ON de.visit_occurrence_id = vo.visit_occurrence_id
 WHERE
   de.drug_exposure_start_date >= p.birth_datetime::DATE

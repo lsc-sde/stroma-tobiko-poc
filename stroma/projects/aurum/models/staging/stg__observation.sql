@@ -1,5 +1,5 @@
 MODEL (
-  name @schema_staging.stg__observation,
+  name @schema_stg.stg__observation,
   kind FULL,
   cron '@monthly'
 );
@@ -30,9 +30,9 @@ SELECT
   o.datasource,
   o.updated_at
 FROM silverobservation AS o
-INNER JOIN @schema_staging.stg__person AS p
+INNER JOIN @schema_stg.stg__person AS p
   ON o.person_id = p.person_id
-INNER JOIN @schema_staging.stg__visit_occurrence AS vo
+INNER JOIN @schema_stg.stg__visit_occurrence AS vo
   ON o.visit_occurrence_id = vo.visit_occurrence_id
 INNER JOIN @catalog_source.@schema_src.concept AS c
   ON o.observation_concept_id = c.concept_id AND c.invalid_reason IS NULL

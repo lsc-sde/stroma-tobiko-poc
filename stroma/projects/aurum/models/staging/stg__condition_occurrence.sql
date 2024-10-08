@@ -1,5 +1,5 @@
 MODEL (
-  name @schema_staging.stg__condition_occurrence,
+  name @schema_stg.stg__condition_occurrence,
   kind FULL,
   cron '@monthly'
 );
@@ -23,9 +23,9 @@ SELECT
   co.condition_source_concept_id,
   co.condition_status_source_value
 FROM silvercondition_occurrence AS co
-INNER JOIN @schema_staging.stg__person AS p
+INNER JOIN @schema_stg.stg__person AS p
   ON co.person_id = p.person_id
-INNER JOIN @schema_staging.stg__visit_occurrence AS vo
+INNER JOIN @schema_stg.stg__visit_occurrence AS vo
   ON co.visit_occurrence_id = vo.visit_occurrence_id
 INNER JOIN @catalog_source.@schema_src.concept AS c
   ON co.condition_concept_id = c.concept_id AND NOT c.standard_concept IS NULL

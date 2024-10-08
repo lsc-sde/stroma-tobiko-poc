@@ -1,5 +1,5 @@
 MODEL (
-  name gold.visit_detail,
+  name @schema_dest.visit_detail,
   kind FULL,
   cron '@monthly',
   grain visit_detail_id,
@@ -25,4 +25,4 @@ SELECT
   vd.preceding_visit_detail_id,
   vd.parent_visit_detail_id,
   vd.visit_occurrence_id
-FROM @schema_staging.stg__visit_detail AS vd
+FROM @schema_src.visit_detail AS vd

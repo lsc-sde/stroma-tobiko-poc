@@ -1,5 +1,5 @@
 MODEL (
-  name gold.drug_strength,
+  name @schema_dest.drug_strength,
   kind FULL,
   cron '@monthly',
   physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb')
@@ -18,4 +18,4 @@ SELECT
   ds.valid_start_date,
   ds.valid_end_date,
   ds.invalid_reason
-FROM silverdrug_strength AS ds
+FROM @schema_src.drug_strength AS ds

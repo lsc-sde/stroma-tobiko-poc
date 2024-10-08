@@ -1,5 +1,5 @@
 MODEL (
-  name gold.measurement,
+  name @schema_dest.measurement,
   kind FULL,
   cron '@monthly',
   grain unique_key,
@@ -30,8 +30,6 @@ SELECT
   m.unit_source_concept_id::INT,
   m.value_source_value::TEXT,
   m.meas_event_field_concept_id::INT,
-  m.measurement_event_id::TEXT,
-  m.unique_key::TEXT,
-  m.datasource::TEXT,
-  m.updated_at::DATETIME
-FROM @schema_staging.stg__measurement AS m /* WHERE */ /*   m.measurement_datetime BETWEEN @start_ds AND @end_ds */
+  m.measurement_event_id::TEXT
+/* m.unique_key::TEXT, */ /* m.datasource::TEXT, */ /* m.updated_at::DATETIME */
+FROM @schema_src.measurement AS m /* WHERE */ /*   m.measurement_datetime BETWEEN @start_ds AND @end_ds */

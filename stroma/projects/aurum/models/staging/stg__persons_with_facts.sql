@@ -1,5 +1,5 @@
 MODEL (
-  name @schema_staging.stg__persons_with_facts,
+  name @schema_stg.stg__persons_with_facts,
   kind FULL,
   cron '@monthly'
 );

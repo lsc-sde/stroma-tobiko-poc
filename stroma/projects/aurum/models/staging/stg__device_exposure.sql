@@ -1,5 +1,5 @@
 MODEL (
-  name @schema_staging.stg__device_exposure,
+  name @schema_stg.stg__device_exposure,
   kind FULL,
   cron '@monthly'
 );
@@ -25,9 +25,9 @@ SELECT
   de.unit_source_value,
   de.unit_source_concept_id
 FROM silverdevice_exposure AS de
-INNER JOIN @schema_staging.stg__person AS p
+INNER JOIN @schema_stg.stg__person AS p
   ON de.person_id = p.person_id
-INNER JOIN @schema_staging.stg__visit_occurrence AS vo
+INNER JOIN @schema_stg.stg__visit_occurrence AS vo
   ON de.visit_occurrence_id = vo.visit_occurrence_id
 WHERE
   de.device_exposure_start_date >= p.birth_datetime::DATE

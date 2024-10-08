@@ -1,5 +1,5 @@
 MODEL (
-  name gold.device_exposure,
+  name @schema_dest.device_exposure,
   kind FULL,
   cron '@monthly',
   grain device_exposure_id,
@@ -26,4 +26,4 @@ SELECT
   de.unit_concept_id,
   de.unit_source_value,
   de.unit_source_concept_id
-FROM @schema_staging.stg__device_exposure AS de
+FROM @schema_src.device_exposure AS de

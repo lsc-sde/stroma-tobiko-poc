@@ -1,5 +1,5 @@
 MODEL (
-  name @schema_staging.stg__person,
+  name @schema_stg.stg__person,
   kind FULL,
   cron '@monthly'
 );
@@ -29,7 +29,7 @@ WHERE
   EXISTS(
     SELECT
       1
-    FROM @schema_staging.stg__persons_with_facts AS op
+    FROM @schema_stg.stg__persons_with_facts AS op
     WHERE
       op.person_id = p.person_id
   )

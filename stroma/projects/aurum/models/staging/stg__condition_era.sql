@@ -1,5 +1,5 @@
 MODEL (
-  name @schema_staging.stg__condition_era,
+  name @schema_stg.stg__condition_era,
   kind FULL,
   cron '@monthly'
 );

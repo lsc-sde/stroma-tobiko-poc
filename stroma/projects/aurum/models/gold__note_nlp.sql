@@ -1,5 +1,5 @@
 MODEL (
-  name gold.note_nlp,
+  name @schema_dest.note_nlp,
   kind FULL,
   cron '@monthly',
   grain note_nlp_id,
@@ -21,4 +21,4 @@ SELECT
   nn.term_exists,
   nn.term_temporal,
   nn.term_modifiers
-FROM silvernote_nlp AS nn
+FROM @schema_src.note_nlp AS nn

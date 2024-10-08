@@ -1,5 +1,5 @@
 MODEL (
-  name gold.drug_era,
+  name @schema_dest.drug_era,
   kind FULL,
   cron '@monthly',
   grain drug_era_id,
@@ -14,4 +14,4 @@ SELECT
   de.drug_era_end_date,
   de.drug_exposure_count,
   de.gap_days
-FROM @schema_staging.stg__drug_era AS de
+FROM @schema_src.drug_era AS de

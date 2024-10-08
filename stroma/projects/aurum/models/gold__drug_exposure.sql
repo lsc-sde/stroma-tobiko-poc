@@ -1,5 +1,5 @@
 MODEL (
-  name gold.drug_exposure,
+  name @schema_dest.drug_exposure,
   kind FULL,
   cron '@monthly',
   grain drug_exposure_id,
@@ -30,4 +30,4 @@ SELECT
   de.drug_source_concept_id,
   de.route_source_value,
   de.dose_unit_source_value
-FROM @schema_staging.stg__drug_exposure AS de
+FROM @schema_src.drug_exposure AS de

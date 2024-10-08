@@ -1,5 +1,5 @@
 MODEL (
-  name gold.note,
+  name @schema_dest.note,
   kind FULL,
   cron '@monthly',
   grain note_id,
@@ -23,4 +23,4 @@ SELECT
   n.note_source_value,
   n.note_event_id,
   n.note_event_field_concept_id
-FROM silvernote AS n
+FROM @schema_src.note AS n

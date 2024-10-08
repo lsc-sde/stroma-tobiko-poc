@@ -1,5 +1,5 @@
 MODEL (
-  name gold.location,
+  name @schema_dest.location,
   kind FULL,
   cron '@monthly',
   grain location_id,
@@ -19,4 +19,4 @@ SELECT
   l.country_source_value,
   l.latitude,
   l.longitude
-FROM silverlocation AS l
+FROM @schema_src.location AS l

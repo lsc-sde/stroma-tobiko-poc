@@ -1,5 +1,5 @@
 MODEL (
-  name @schema_staging.stg__specimen,
+  name @schema_stg.stg__specimen,
   kind FULL,
   cron '@monthly'
 );
@@ -21,7 +21,7 @@ SELECT
   sp.anatomic_site_source_value,
   sp.disease_status_source_value
 FROM silverspecimen AS sp
-INNER JOIN @schema_staging.stg__person AS p
+INNER JOIN @schema_stg.stg__person AS p
   ON sp.person_id = p.person_id
 WHERE
   sp.specimen_date::DATE >= p.birth_datetime::DATE

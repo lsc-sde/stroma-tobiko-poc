@@ -1,5 +1,5 @@
 MODEL (
-  name gold.provider,
+  name @schema_dest.provider,
   kind FULL,
   cron '@monthly',
   grain provider_id,
@@ -20,4 +20,4 @@ SELECT
   p.specialty_source_concept_id,
   p.gender_source_value,
   p.gender_source_concept_id
-FROM silverprovider AS p
+FROM @schema_src.provider AS p

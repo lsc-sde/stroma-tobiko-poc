@@ -1,5 +1,5 @@
 MODEL (
-  name @schema_staging.stg__visit_detail,
+  name @schema_stg.stg__visit_detail,
   kind FULL,
   cron '@monthly'
 );
@@ -24,16 +24,16 @@ SELECT
   vd.parent_visit_detail_id,
   vd.visit_occurrence_id
 FROM silvervisit_detail AS vd
-INNER JOIN @schema_staging.stg__person AS p
+INNER JOIN @schema_stg.stg__person AS p
   ON vd.person_id = p.person_id
-LEFT JOIN @schema_staging.stg__death AS d
+LEFT JOIN @schema_stg.stg__death AS d
   ON vd.person_id = d.person_id
 /* keep only visit detail for clean visit occurrences */
 WHERE
   EXISTS(
     SELECT
       1
-    FROM @schema_staging.stg__visit_occurrence AS vo
+    FROM @schema_stg.stg__visit_occurrence AS vo
     WHERE
       vo.visit_occurrence_id = vd.visit_occurrence_id
   )
