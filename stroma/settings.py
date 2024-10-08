@@ -55,7 +55,6 @@ default_gateway: str = os.getenv("DEFAULT_GATEWAY", EnumDefaultGateway.DATABRICK
 
 database = os.getenv("DUCKDB_DATABASE")
 catalog_source = Path(database).stem
-print(catalog_source)
 
 
 gateway_duckdb = GatewayConfig(

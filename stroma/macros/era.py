@@ -19,6 +19,6 @@ def calculate_condition_era(evaluator, schema: str) -> str:
 def calculate_drug_era(evaluator, schema: str) -> str:
 
     fragment = here.joinpath("sql", "drug_era.sql").read_text()
-    fragment = fragment.format(schema=schema, schema_vocab=schema)
+    fragment = fragment.format(schema=schema, schema_vocab="base")
 
     return fragment
