@@ -30,7 +30,6 @@
 				"ms-python.black-formatter",
 				"ms-python.python",
 				"ms-python.vscode-pylance",
-				"mtxr.sqltools",
 				"njpwerner.autodocstring",
 				"tamasfe.even-better-toml",
 			],
