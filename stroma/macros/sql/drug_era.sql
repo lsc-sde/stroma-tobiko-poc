@@ -15,7 +15,7 @@ with ctePreDrugTarget as (
       nullif(drug_exposure_end_date, NULL),
       ---If drug_exposure_end_date != NULL, return drug_exposure_end_date, otherwise go to next case
       nullif(
-        drug_exposure_start_date + INTERVAL days_supply,
+        date_add(drug_exposure_start_date, interval (d.days_supply) day),
         drug_exposure_start_date
       ),
       ---If days_supply != NULL or 0, return drug_exposure_start_date + days_supply, otherwise go to next case
@@ -26,7 +26,7 @@ with ctePreDrugTarget as (
   inner join
     {schema_vocab}.concept_ancestor as ca
     on d.drug_concept_id = ca.descendant_concept_id
-  inner join {schema_vocab.concept} as c on ca.ancestor_concept_id = c.concept_id
+  inner join {schema_vocab}.concept as c on ca.ancestor_concept_id = c.concept_id
   where
     c.vocabulary_id = 'RxNorm' ---8 selects RxNorm from the vocabulary_id
     and c.concept_class_id = 'Ingredient'
@@ -150,7 +150,7 @@ cteFinalTarget (
     drug_sub_exposure_start_date,
     drug_sub_exposure_end_date,
     drug_exposure_count,
-    datediff(day, drug_sub_exposure_start_date, drug_sub_exposure_end_date)
+    date_diff('day', drug_sub_exposure_start_date, drug_sub_exposure_end_date)
       as days_exposed
   from cteSubExposures
 ),
@@ -200,7 +200,7 @@ cteEndDates (person_id, ingredient_concept_id, end_date) as (
         select
           person_id,
           ingredient_concept_id,
-          dateadd(day, 30, drug_sub_exposure_end_date),
+          date_add(drug_sub_exposure_end_date, interval 30 day) as event_date,
           1 as event_type,
           NULL
         from cteFinalTarget
@@ -240,7 +240,7 @@ select
   min(drug_sub_exposure_start_date) as drug_era_start_date,
   drug_era_end_date,
   sum(drug_exposure_count) as drug_exposure_count,
-  datediff(day, min(drug_sub_exposure_start_date), drug_era_end_date)
+  date_diff('day', min(drug_sub_exposure_start_date), drug_era_end_date)
   - sum(days_exposed) as gap_days
 from cteDrugEraEnds
 group by person_id, drug_concept_id, drug_era_end_date
