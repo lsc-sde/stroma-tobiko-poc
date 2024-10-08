@@ -11,10 +11,11 @@ def get_observation_period(
     end_date: exp.Column,
 ) -> str:
 
-    minimum_observation_period_start_date = evaluator.var(
-        "minimum_observation_period_start_date"
-    )
+    # minimum_observation_period_start_date = evaluator.var(
+    #     "minimum_observation_period_start_date"
+    # )
 
+    minimum_observation_period_start_date = "1900-01-01"
     # where = condition("x=1").and_("y=1")
     # select("*").from_("y").where(where).sql()
 
@@ -84,7 +85,5 @@ def get_observation_period_alternative(
     )
 
     subquery1 = select("person_id", cond_1, cond_2).from_(model).distinct()
-
-    # print(subquery1)
 
     return cond_1, cond_2
