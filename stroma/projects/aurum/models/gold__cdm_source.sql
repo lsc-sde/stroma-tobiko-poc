@@ -5,8 +5,8 @@ MODEL (
 );
 
 SELECT
-  'IDRIL-1-BRONZE' AS cdm_source_abbreviation,
-  'IDRIL-1 Medallion Bronze Layer' AS source_description,
+  'IDRIL-1-GOLD' AS cdm_source_abbreviation,
+  'IDRIL-1 Medallion Gold Layer' AS source_description,
   'LSC SDE' AS cdm_holder,
   NULL AS source_documentation_reference,
   NULL AS cdm_etl_reference,
