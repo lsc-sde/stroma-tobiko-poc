@@ -1,6 +1,6 @@
 MODEL (
   name @schema_temp.temp__device_dates,
-  kind FULL,
+  kind VIEW,
   cron '@monthly',
   grain person_id
 );

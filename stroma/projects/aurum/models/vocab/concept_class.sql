@@ -8,4 +8,4 @@ SELECT
   cc.concept_class_id,
   cc.concept_class_name,
   cc.concept_class_concept_id
-FROM @catalog_src.@schema_src.concept_class AS cc
+FROM @schema_src.concept_class AS cc

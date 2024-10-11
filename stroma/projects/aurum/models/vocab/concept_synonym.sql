@@ -8,4 +8,4 @@ SELECT
   cs.concept_id,
   cs.concept_synonym_name,
   cs.language_concept_id
-FROM @catalog_src.@schema_src.concept_synonym AS cs
+FROM @schema_src.concept_synonym AS cs

@@ -34,7 +34,7 @@ INNER JOIN @schema_stg.stg__person AS p
   ON o.person_id = p.person_id
 INNER JOIN @schema_stg.stg__visit_occurrence AS vo
   ON o.visit_occurrence_id = vo.visit_occurrence_id
-INNER JOIN @catalog_src.@schema_src.concept AS c
+INNER JOIN @schema_src.concept AS c
   ON o.observation_concept_id = c.concept_id AND c.invalid_reason IS NULL
 WHERE
   o.observation_date >= p.birth_datetime::DATE
