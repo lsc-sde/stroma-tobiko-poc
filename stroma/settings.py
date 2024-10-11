@@ -54,8 +54,6 @@ default_gateway: str = os.getenv("DEFAULT_GATEWAY", EnumDefaultGateway.DATABRICK
 # Local duckdb
 
 database = os.getenv("DUCKDB_DATABASE")
-catalog_source = Path(database).stem
-
 
 gateway_duckdb = GatewayConfig(
     connection=DuckDBConnectionConfig(database=os.getenv("DUCKDB_DATABASE")),
@@ -63,7 +61,6 @@ gateway_duckdb = GatewayConfig(
         database=os.getenv("DUCKDB_STATE_DATABASE")
     ),
     state_schema=state_schema,
-    variables={"catalog_source": catalog_source},
 )
 
 # Databricks
@@ -85,7 +82,7 @@ gateway_databricks = GatewayConfig(
     ),
     state_schema=state_schema,
 )
-print(gateway_databricks.connection.json())
+
 # MSSQL
 
 gateway_mssql = GatewayConfig(

@@ -4,7 +4,6 @@ MODEL (
   cron '@monthly',
   grain unique_key,
   physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb'),
-  clustered_by (measurement_concept_id, measurement_date)
 );
 
 SELECT
