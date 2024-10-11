@@ -27,7 +27,7 @@ INNER JOIN @schema_stg.stg__person AS p
   ON co.person_id = p.person_id
 INNER JOIN @schema_stg.stg__visit_occurrence AS vo
   ON co.visit_occurrence_id = vo.visit_occurrence_id
-INNER JOIN @catalog_source.@schema_src.concept AS c
+INNER JOIN @catalog_src.@schema_src.concept AS c
   ON co.condition_concept_id = c.concept_id AND NOT c.standard_concept IS NULL
 WHERE
   NOT co.condition_occurrence_id IS NULL
