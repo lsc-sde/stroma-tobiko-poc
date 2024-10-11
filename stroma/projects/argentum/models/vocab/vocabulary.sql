@@ -10,4 +10,4 @@ SELECT
   v.vocabulary_reference,
   v.vocabulary_version,
   v.vocabulary_concept_id
-FROM @catalog_source.@schema_src.vocabulary AS v
+FROM @catalog_src.@schema_src.vocabulary AS v

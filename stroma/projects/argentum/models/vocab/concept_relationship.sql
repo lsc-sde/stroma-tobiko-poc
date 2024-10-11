@@ -11,4 +11,4 @@ SELECT
   cr.valid_start_date,
   cr.valid_end_date,
   cr.invalid_reason
-FROM @catalog_source.@schema_src.concept_relationship AS cr
+FROM @catalog_src.@schema_src.concept_relationship AS cr
