@@ -42,7 +42,7 @@ class EnumDefaultGateway(str, Enum):
 
 class EnumMedallionLayer(str, Enum):
 
-    BASE = "base"
+    BASE = os.getenv(f"{os.getenv('DEFAULT_GATEWAY').upper()}_SCHEMA_BASE", "base")
     BRONZE = "bronze"
     SILVER = "silver"
     GOLD = "gold"
@@ -85,7 +85,7 @@ gateway_databricks = GatewayConfig(
     ),
     state_schema=state_schema,
 )
-
+print(gateway_databricks.connection.json())
 # MSSQL
 
 gateway_mssql = GatewayConfig(
