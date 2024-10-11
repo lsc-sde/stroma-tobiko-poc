@@ -15,7 +15,7 @@
 	"postCreateCommand": "bash ./.devcontainer/scripts/postCreate.sh",
 	"postStartCommand": "bash ./.devcontainer/scripts/postStart.sh",
 	"mounts": [
-		"source=${localEnv:HOME}${localEnv:USERPROFILE}/.sqlmesh,target=/home/vscode/.sqlmesh,type=bind,consistency=cached",
+		// "source=${localEnv:HOME}${localEnv:USERPROFILE}/.sqlmesh,target=/home/vscode/.sqlmesh,type=bind,consistency=cached",
 		"source=${localEnv:HOME}${localEnv:USERPROFILE}/dev/ssl-certificates,target=/home/vscode/ssl-certificates,type=bind,consistency=cached"
 	],
 	"customizations": {
