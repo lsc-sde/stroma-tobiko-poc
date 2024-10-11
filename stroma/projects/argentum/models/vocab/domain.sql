@@ -8,4 +8,4 @@ SELECT
   d.domain_id,
   d.domain_name,
   d.domain_concept_id
-FROM @catalog_src.@schema_src.domain AS d
+FROM @schema_src.domain AS d

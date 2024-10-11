@@ -15,4 +15,4 @@ SELECT
   c.valid_start_date,
   c.valid_end_date,
   c.invalid_reason
-FROM @catalog_src.@schema_src.concept AS c
+FROM @schema_src.concept AS c

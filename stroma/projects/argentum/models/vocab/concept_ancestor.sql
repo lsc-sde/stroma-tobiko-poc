@@ -9,4 +9,4 @@ SELECT
   ca.descendant_concept_id,
   ca.min_levels_of_separation,
   ca.max_levels_of_separation
-FROM @catalog_src.@schema_src.concept_ancestor AS ca
+FROM @schema_src.concept_ancestor AS ca

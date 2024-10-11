@@ -14,4 +14,4 @@ SELECT
   stcm.valid_start_date,
   stcm.valid_end_date,
   stcm.invalid_reason
-FROM @catalog_src.@schema_src.source_to_concept_map AS stcm
+FROM @schema_src.source_to_concept_map AS stcm
