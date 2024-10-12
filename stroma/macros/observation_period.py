@@ -5,7 +5,7 @@ from sqlglot import select, condition, case
 
 @macro()
 def get_observation_period(
-    evaluator: ExecutionContext,
+    evaluator,
     model: exp.Table,
     start_date: exp.Column,
     end_date: exp.Column,
@@ -54,7 +54,7 @@ select
 
 @macro()
 def get_observation_period_alternative(
-    evaluator: ExecutionContext,
+    evaluator,
     model: exp.Table,
     start_date: exp.Column,
     end_date: exp.Column,
