@@ -15,11 +15,11 @@ with ctePreDrugTarget as (
       nullif(drug_exposure_end_date, NULL),
       ---If drug_exposure_end_date != NULL, return drug_exposure_end_date, otherwise go to next case
       nullif(
-        date_add(drug_exposure_start_date, d.days_supply),
+        dateadd(drug_exposure_start_date, d.days_supply),
         drug_exposure_start_date
       ),
       ---If days_supply != NULL or 0, return drug_exposure_start_date + days_supply, otherwise go to next case
-       date_add(drug_exposure_start_date, 1)
+       dateadd(drug_exposure_start_date, 1)
     ---Add 1 day to the drug_exposure_start_date since there is no end_date or INTERVAL for the days_supply
     ) as drug_exposure_end_date
   from {schema}.drug_exposure as d
