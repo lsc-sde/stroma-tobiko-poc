@@ -28,9 +28,7 @@ SELECT
   m.value_source_value,
   m.meas_event_field_concept_id,
   m.measurement_event_id
-  -- m.unique_key,
-  -- m.datasource,
-  -- m.updated_at
+/* m.unique_key, */ /* m.datasource, */ /* m.updated_at */
 FROM @schema_src.measurement AS m
 INNER JOIN @schema_stg.stg__person AS p
   ON m.person_id = p.person_id

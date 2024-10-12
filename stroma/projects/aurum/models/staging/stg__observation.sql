@@ -26,9 +26,7 @@ SELECT
   o.value_source_value,
   o.observation_event_id,
   o.obs_event_field_concept_id
-  -- o.unique_key,
-  -- o.datasource,
-  -- o.updated_at
+/* o.unique_key, */ /* o.datasource, */ /* o.updated_at */
 FROM @schema_src.observation AS o
 INNER JOIN @schema_stg.stg__person AS p
   ON o.person_id = p.person_id

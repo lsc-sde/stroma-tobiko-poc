@@ -33,8 +33,9 @@ WHERE
     WHERE
       op.person_id = p.person_id
   )
-  AND p.person_id NOT in (
-    SELECT o.person_id
+  AND NOT p.person_id IN (
+    SELECT
+      o.person_id
     FROM @schema_src.observation AS o
     WHERE
       o.observation_concept_id = 44787910

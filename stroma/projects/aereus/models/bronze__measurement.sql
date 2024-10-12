@@ -3,7 +3,7 @@ MODEL (
   kind FULL,
   cron '@monthly',
   grain unique_key,
-  physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb'),
+  physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb')
 );
 
 SELECT
