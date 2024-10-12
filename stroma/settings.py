@@ -140,197 +140,22 @@ class SQLMeshSettings(BaseModel):
 ###############################################################################
 
 
-class TableSettings(BaseModel):
-    include: Optional[bool] = True
-    include_source_concepts: Optional[bool] = False
-    concept_ids: Optional[int] = None
-
-
-class EventSettings(TableSettings):
-    start_date: Optional[str] = "2010-01-01"
-    end_date: Optional[date] = None
-
-
-class CareSiteSettings(TableSettings):
-    pass
-
-
-class CdmSourceSettings(BaseModel):
-    cdm_source_name: Optional[str] = "IDRIL - Project Description"
-    cdm_source_abbreviation: Optional[str] = "IDRIL-P_DESC"
-    cdm_holder: Optional[str] = "LSC SDE"
-    source_description: Optional[str] = "OMOP 5.4 CDM Gold"
-    cdm_version: Optional[str] = "5.4"
-    source_documentation_reference: Optional[str] = "https://omop-lsc.surge.sh/"
-    cdm_etl_reference: Optional[str] = "https://omop-lsc.surge.sh/"
-    source_release_date: Optional[date] = date.today()
-    cdm_release_date: Optional[date] = date.today()
-    vocabulary_version: Optional[str] = None
-
-
-class ConditionEraSettings(EventSettings):
-    pass
-
-
-class ConditionOccurrenceSettings(EventSettings):
-    pass
-
-
-class CostSettings(EventSettings):
-    pass
-
-
-class DeathSettings(EventSettings):
-    pass
-
-
-class DeviceExposureSettings(EventSettings):
-    pass
-
-
-class DoseEraSettings(EventSettings):
-    pass
-
-
-class DrugEraSettings(EventSettings):
-    pass
-
-
-class DrugExposureSettings(EventSettings):
-    pass
-
-
-class DrugStrengthSettings(EventSettings):
-    pass
-
-
-class EpisodeEventSettings(EventSettings):
-    pass
-
-
-class EpisodeSettings(EventSettings):
-    pass
-
-
-class FactRelationshipSettings(EventSettings):
-    pass
-
-
-class LocationSettings(EventSettings):
-    pass
-
-
-class MeasurementSettings(EventSettings):
-    pass
-
-
-class NoteNlpSettings(EventSettings):
-    include: bool = False
-
-
-class NoteSettings(EventSettings):
-    include: bool = False
-
-
-class ObservationPeriodSettings(EventSettings):
-    pass
-
-
-class ObservationSettings(EventSettings):
-    pass
-
-
-class PayerPlanPeriodSettings(EventSettings):
-    pass
-
-
-class PersonSettings(EventSettings):
-    truncate_birth_datetime: bool = True
-
-
-class ProcedureOccurrenceSettings(EventSettings):
-    pass
-
-
-class ProviderSettings(TableSettings):
-    pass
-
-
-class SpecimenSettings(EventSettings):
-    pass
-
-
-class VisitDetailSettings(EventSettings):
-    pass
-
-
-class VisitOccurrenceSettings(EventSettings):
-    pass
-
-
-class ModelSettings(BaseModel):
-    cfg_caresite: Optional[CareSiteSettings] = CareSiteSettings()
-    cfg_cdm_source: Optional[CdmSourceSettings] = CdmSourceSettings()
-    cfg_condition_era: Optional[ConditionEraSettings] = ConditionEraSettings()
-    cfg_condition_occurrence: Optional[ConditionOccurrenceSettings] = (
-        ConditionOccurrenceSettings()
-    )
-    cfg_cost: Optional[CostSettings] = CostSettings()
-    cfg_death: Optional[DeathSettings] = DeathSettings()
-    cfg_device_exposure: Optional[DeviceExposureSettings] = DeviceExposureSettings()
-    cfg_dose_era: Optional[DoseEraSettings] = DoseEraSettings()
-    cfg_drug_era: Optional[DrugEraSettings] = DrugEraSettings()
-    cfg_drug_exposure: Optional[DrugExposureSettings] = DrugExposureSettings()
-    cfg_drug_strength: Optional[DrugStrengthSettings] = DrugStrengthSettings()
-    cfg_episode_event: Optional[EpisodeEventSettings] = EpisodeEventSettings()
-    cfg_episode: Optional[EpisodeSettings] = EpisodeSettings()
-    cfg_fact_relationship: Optional[FactRelationshipSettings] = (
-        FactRelationshipSettings()
-    )
-    cfg_location: Optional[LocationSettings] = LocationSettings()
-    cfg_measurement: Optional[MeasurementSettings] = MeasurementSettings()
-    cfg_note_nlp: Optional[NoteNlpSettings] = NoteNlpSettings()
-    cfg_note: Optional[NoteSettings] = NoteSettings()
-    cfg_observation_period: Optional[ObservationPeriodSettings] = (
-        ObservationPeriodSettings()
-    )
-    cfg_observation: Optional[ObservationSettings] = ObservationSettings()
-    cfg_payer_plan_period: Optional[PayerPlanPeriodSettings] = PayerPlanPeriodSettings()
-    cfg_person: Optional[PersonSettings] = PersonSettings()
-    cfg_procedure_occurrence: Optional[ProcedureOccurrenceSettings] = (
-        ProcedureOccurrenceSettings()
-    )
-    cfg_provider: Optional[ProviderSettings] = ProviderSettings()
-    cfg_specimen: Optional[SpecimenSettings] = SpecimenSettings()
-    cfg_visit_detail: Optional[VisitDetailSettings] = VisitDetailSettings()
-    cfg_visit_occurrence: Optional[VisitOccurrenceSettings] = VisitOccurrenceSettings()
-
-
 class OMOPSettings(BaseModel):
 
-    layer: EnumMedallionLayer = Field(
-        ...,
-        description="The name of the medallion layer and should be one of bronze, silver or gold.",
-        pattern="bronze|silver|gold",
-    )
-    schema_src: Optional[EnumMedallionLayer | str] = EnumMedallionLayer.BASE
+    settings: Optional[dict] = {}
 
-    settings: Optional[dict]
+    base: Optional[str] = EnumMedallionLayer.BASE
+    bronze: Optional[str] = EnumMedallionLayer.BRONZE
+    silver: Optional[str] = EnumMedallionLayer.SILVER
+    gold: Optional[str] = EnumMedallionLayer.GOLD
 
-    @computed_field
-    @property
-    def schema_dest(self) -> str:
-        return self.layer
+    stg_bronze: Optional[str] = "stg_" + EnumMedallionLayer.BRONZE
+    stg_silver: Optional[str] = "stg_" + EnumMedallionLayer.SILVER
+    stg_gold: Optional[str] = "stg_" + EnumMedallionLayer.GOLD
 
-    @computed_field
-    @property
-    def schema_stg(self) -> str:
-        return "stg_" + self.schema_dest
-
-    @computed_field
-    @property
-    def schema_temp(self) -> str:
-        return "temp_" + self.schema_dest
+    temp_bronze: Optional[str] = "temp_" + EnumMedallionLayer.BRONZE
+    temp_silver: Optional[str] = "temp_" + EnumMedallionLayer.SILVER
+    temp_gold: Optional[str] = "temp_" + EnumMedallionLayer.GOLD
 
     @computed_field
     @property
