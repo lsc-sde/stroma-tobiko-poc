@@ -7,8 +7,7 @@ select
 	coalesce(
       nullif(co.condition_end_date,
 	NULL),
-	condition_start_date + INTERVAL 1 DAY
-    ) as condition_end_date
+	date_add(condition_start_date, 1)) as condition_end_date
 from
 	{schema}.condition_occurrence as co
 /* Depending on the needs of your data, you can put more filters on to your code. We assign 0 to our unmapped condition_concept_id's,
@@ -21,7 +20,7 @@ cteEndDates as (
   select
     person_id,
     condition_concept_id,
-    event_date - INTERVAL 30 DAY as end_date -- unpad the end date
+    date_add(event_date, -30) as end_date -- unpad the end date
   from
     (
       select
@@ -51,7 +50,7 @@ cteEndDates as (
           select
             person_id,
             condition_concept_id,
-            condition_end_date + INTERVAL 30 DAY,
+            date_add(condition_end_date, 30) as event_date,
             1 as event_type,
             NULL
           from cteConditionTarget
