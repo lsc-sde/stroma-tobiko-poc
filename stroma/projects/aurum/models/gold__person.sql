@@ -24,4 +24,4 @@ SELECT
   p.race_source_concept_id,
   p.ethnicity_source_value,
   p.ethnicity_source_concept_id
-FROM @schema_src.person AS p
+FROM @schema_stg.stg__person AS p

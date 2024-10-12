@@ -31,4 +31,4 @@ SELECT
   m.meas_event_field_concept_id::INT,
   m.measurement_event_id::TEXT
 /* m.unique_key::TEXT, */ /* m.datasource::TEXT, */ /* m.updated_at::DATETIME */
-FROM @schema_src.measurement AS m /* WHERE */ /*   m.measurement_datetime BETWEEN @start_ds AND @end_ds */
+FROM @schema_stg.stg__measurement AS m /* WHERE */ /*   m.measurement_datetime BETWEEN @start_ds AND @end_ds */

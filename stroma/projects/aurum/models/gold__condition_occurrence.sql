@@ -22,6 +22,4 @@ SELECT
   co.condition_source_value,
   co.condition_source_concept_id,
   co.condition_status_source_value
-FROM @schema_src.condition_occurrence AS co
-WHERE
-  co.condition_start_date >= '2015-01-01'
+FROM @schema_stg.stg__condition_occurrence AS co

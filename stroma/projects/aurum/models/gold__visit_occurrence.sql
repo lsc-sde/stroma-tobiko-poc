@@ -24,4 +24,4 @@ SELECT
   vo.discharged_to_concept_id,
   vo.discharged_to_source_value,
   vo.preceding_visit_occurrence_id
-FROM @schema_src.visit_occurrence AS vo
+FROM @schema_stg.stg__visit_occurrence AS vo

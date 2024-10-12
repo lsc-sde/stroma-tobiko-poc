@@ -26,4 +26,4 @@ SELECT
   de.unit_concept_id,
   de.unit_source_value,
   de.unit_source_concept_id
-FROM @schema_src.device_exposure AS de
+FROM @schema_stg.stg__device_exposure AS de

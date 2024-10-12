@@ -22,4 +22,4 @@ SELECT
   s.unit_source_value,
   s.anatomic_site_source_value,
   s.disease_status_source_value
-FROM @schema_src.specimen AS s
+FROM @schema_stg.stg__specimen AS s

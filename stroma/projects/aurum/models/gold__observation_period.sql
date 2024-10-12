@@ -12,4 +12,4 @@ SELECT
   observation_period_start_date,
   observation_period_end_date,
   32817 AS period_type_concept_id
-FROM @schema_src.observation_period
+FROM @schema_stg.stg__observation_period

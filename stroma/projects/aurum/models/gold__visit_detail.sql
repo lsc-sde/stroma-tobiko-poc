@@ -25,4 +25,4 @@ SELECT
   vd.preceding_visit_detail_id,
   vd.parent_visit_detail_id,
   vd.visit_occurrence_id
-FROM @schema_src.visit_detail AS vd
+FROM @schema_stg.stg__visit_detail AS vd

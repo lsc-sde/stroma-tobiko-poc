@@ -14,4 +14,4 @@ SELECT
   d.cause_concept_id,
   d.cause_source_value,
   d.cause_source_concept_id
-FROM @schema_src.death AS d
+FROM @schema_stg.stg__death AS d
