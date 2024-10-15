@@ -17,7 +17,13 @@ MODEL (
         day_of_birth,
         birth_datetime
       )
-    )
+    ),
+    accepted_range(
+      column := year_of_birth,
+      min_v := 1850,
+      max_v := current_date,
+      inclusive := true)
+
   )
 );
 
