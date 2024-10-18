@@ -11,16 +11,12 @@ def get_observation_period(
     end_date: exp.Column,
 ) -> str:
 
-    # minimum_observation_period_start_date = evaluator.var(
-    #     "minimum_observation_period_start_date"
-    # )
+    minimum_observation_period_start_date = evaluator.var(
+        "minimum_observation_period_start_date"
+    )
 
-    minimum_observation_period_start_date = "1900-01-01"
-    # where = condition("x=1").and_("y=1")
-    # select("*").from_("y").where(where).sql()
+    # minimum_observation_period_start_date = "1900-01-01"
 
-    # cond_1 = case().when(start_date>=minimum_observation_period_start_date and start_date <= exp.CurrentDate() )
-    # fragment = select("*").from_(model).sql()
     fragment = f"""
 select
     distinct person_id ,
