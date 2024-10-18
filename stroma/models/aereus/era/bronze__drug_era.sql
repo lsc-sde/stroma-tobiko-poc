@@ -3,15 +3,16 @@
 -- https://github.com/OHDSI/ETL-CMS/blob/master/SQL/create_CDMv5_drug_era_non_stockpile.sql
 
 MODEL (
-  name gold.drug_era,
+  name bronze.drug_era,
   kind FULL,
   cron '@monthly',
-  grain drug_era_id
+  grain drug_era_id,
+  dialect 'databricks'
 );
 
 
-@DEF(schema, 'gold');
-@DEF(schema_vocab, 'gold');
+@DEF(schema, 'bronze');
+@DEF(schema_vocab, 'bronze');
 
 
 with ctePreDrugTarget as (
