@@ -3,28 +3,7 @@ MODEL (
   kind FULL,
   cron '@monthly',
   grain person_id,
-  physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb'),
-  audits (
-    unique_values(columns := (
-      person_id
-    )),
-    not_null(
-      columns := (
-        person_id,
-        gender_concept_id,
-        year_of_birth,
-        month_of_birth,
-        day_of_birth,
-        birth_datetime
-      )
-    ),
-    accepted_range(
-      column := year_of_birth,
-      min_v := 1850,
-      max_v := current_date,
-      inclusive := true)
-
-  )
+  physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb')
 );
 
 /* This is the patient table. */

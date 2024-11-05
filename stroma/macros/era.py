@@ -1,4 +1,4 @@
-from sqlmesh import macro, SQL, ExecutionContext
+from sqlmesh import macro
 import sqlglot.expressions as exp
 from sqlglot import select, condition, case
 from pathlib import Path

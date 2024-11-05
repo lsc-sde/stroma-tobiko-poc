@@ -5,6 +5,8 @@ MODEL (
   grain condition_era_id
 );
 
+@DEF(schema, 'silver');
+
 with cteConditionTarget as (
 select
 	co.condition_occurrence_id,
@@ -16,7 +18,7 @@ select
 	NULL),
 	date_add(condition_start_date, 1)) as condition_end_date
 from
-	silver.condition_occurrence as co
+	@schema.condition_occurrence as co
 /* Depending on the needs of your data, you can put more filters on to your code. We assign 0 to our unmapped condition_concept_id's,
 	 * and since we don't want different conditions put in the same era, we put in the filter below.
  	 */
