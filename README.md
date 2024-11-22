@@ -40,8 +40,8 @@ This also allows it to generate detailed column-level lineage which allows teams
 SQLMesh can track the exact lines of code that result in new columns generated from upstream models.
 For instance, in the image below, it is clear that the `year` column in the `silver.person` model has been calculated from the `birth_datetime` column of the upstream `bronze.person` model rather than the `year` column in that model.
 
-![Image showing SQLMesh column-level lineage](image.png)
+![Image showing SQLMesh column-level lineage](./docs/static/images/one-col-lineage.png)
 
 It can also do this when a downstream column is created from a combination of two or more upstream columns as shown in the image below.
 
-![Image showing SQLMesh column-level lineage for 2 columns ](image-1.png)
+![Image showing SQLMesh column-level lineage for 2 columns ](./docs/static/images/two-col-lineage.png)
