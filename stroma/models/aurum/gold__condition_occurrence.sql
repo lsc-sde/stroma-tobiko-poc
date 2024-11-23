@@ -5,11 +5,11 @@ MODEL (
   grain condition_occurrence_id,
   references (
     person_id,
-    condition_concept_id as concept_id,
-    condition_type_concept_id as concept_id,
-    condition_status_concept_id as concept_id,
-    ),
-    description 'This model contains records of Events of a Person suggesting the presence of a disease or medical condition stated as a diagnosis, a sign, or a symptom, which is either observed by a Provider or reported by the patient.',
+    condition_concept_id AS concept_id,
+    condition_type_concept_id AS concept_id,
+    condition_status_concept_id AS concept_id
+  ),
+  description 'This model contains records of Events of a Person suggesting the presence of a disease or medical condition stated as a diagnosis, a sign, or a symptom, which is either observed by a Provider or reported by the patient.',
   column_descriptions (
     condition_occurrence_id = 'Unique identifier for each condition occurrence.',
     person_id = 'Unique identifier for each person.',

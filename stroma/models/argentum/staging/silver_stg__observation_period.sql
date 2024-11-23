@@ -7,15 +7,53 @@ MODEL (
 @DEF(layer, 'silver');
 
 WITH spans AS (
-select * from (@get_observation_period(@layer.condition_era, condition_era_start_date, condition_era_end_date))
-union select * from (@get_observation_period(@layer.device_exposure, device_exposure_start_date, device_exposure_start_date))
-union select * from (@get_observation_period(@layer.drug_exposure, drug_exposure_start_date, drug_exposure_start_date))
-union select * from (@get_observation_period(@layer.measurement, measurement_date, measurement_date))
-union select * from (@get_observation_period(@layer.observation, observation_date, observation_date))
-union select * from (@get_observation_period(@layer.procedure_occurrence, procedure_date, procedure_date))
-union select * from (@get_observation_period(@layer.specimen, specimen_date, specimen_date))
-union select * from (@get_observation_period(@layer.visit_occurrence, visit_start_date, visit_end_date))
-
+  SELECT
+    *
+  FROM (
+    @get_observation_period(@layer.condition_era, condition_era_start_date, condition_era_end_date)
+  )
+  UNION
+  SELECT
+    *
+  FROM (
+    @get_observation_period(@layer.device_exposure, device_exposure_start_date, device_exposure_start_date)
+  )
+  UNION
+  SELECT
+    *
+  FROM (
+    @get_observation_period(@layer.drug_exposure, drug_exposure_start_date, drug_exposure_start_date)
+  )
+  UNION
+  SELECT
+    *
+  FROM (
+    @get_observation_period(@layer.measurement, measurement_date, measurement_date)
+  )
+  UNION
+  SELECT
+    *
+  FROM (
+    @get_observation_period(@layer.observation, observation_date, observation_date)
+  )
+  UNION
+  SELECT
+    *
+  FROM (
+    @get_observation_period(@layer.procedure_occurrence, procedure_date, procedure_date)
+  )
+  UNION
+  SELECT
+    *
+  FROM (
+    @get_observation_period(@layer.specimen, specimen_date, specimen_date)
+  )
+  UNION
+  SELECT
+    *
+  FROM (
+    @get_observation_period(@layer.visit_occurrence, visit_start_date, visit_end_date)
+  )
 ), observation_period AS (
   SELECT
     person_id,

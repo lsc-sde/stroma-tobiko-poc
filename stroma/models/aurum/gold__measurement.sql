@@ -11,7 +11,7 @@ SELECT
   m.person_id::INT,
   m.measurement_concept_id::INT,
   m.measurement_date::DATE,
-  m.measurement_datetime::DATETIME,
+  m.measurement_datetime::TIMESTAMP,
   m.measurement_time::TIME,
   m.measurement_type_concept_id::INT,
   m.operator_concept_id::INT,

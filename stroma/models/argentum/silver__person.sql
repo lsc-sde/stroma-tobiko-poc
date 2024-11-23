@@ -13,7 +13,7 @@ SELECT
   p.year_of_birth::INT, /* This is the year the patient was born */
   p.month_of_birth::INT,
   p.day_of_birth::INT,
-  p.birth_datetime::DATETIME,
+  p.birth_datetime::TIMESTAMP,
   p.race_concept_id,
   p.ethnicity_concept_id,
   p.location_id,
