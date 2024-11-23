@@ -13,7 +13,7 @@ dependencies = [
     "pydantic-settings",
     "python-dotenv",
     "graphviz",
-    "sqlmesh[web,databricks,postgres,github]",
+    "sqlmesh[web,github]",
 ]
 dynamic = ["version"]
 
@@ -29,18 +29,15 @@ Homepage = "https://github.com/lsc-sde/stroma"
 
 [project.optional-dependencies]
 
-dev = [
-    "black",
-    "mkdocs-material",
-    "mkdocs",
-    "mkdocstrings-python",
-    "mkdocstrings",
-    "nbstripout",
-    "pre-commit",
-]
-
 mssql = ["sqlmesh[mssql]"]
 
+databricks = ["sqlmesh[databricks,postgres]"]
 
-[tool.isort]
-profile = "black"
+[dependency-groups]
+dev = [
+    "mkdocs>=1.6.1",
+    "mkdocstrings>=0.27.0",
+    "mkdocstrings-python>=1.12.2",
+    "pre-commit>=4.0.1",
+    "ruff>=0.7.4",
+]
