@@ -27,7 +27,7 @@ load_dotenv(find_dotenv(), override=True)
 ###############################################################################
 
 
-class EnumDefaultGateway(str, Enum):
+class EnumGateway(str, Enum):
     """
     Enumeration class representing the default gateway options.
 
@@ -52,17 +52,25 @@ class EnumMedallionLayer(str, Enum):
 
 
 state_schema: str = os.getenv("STATE_SCHEMA", "stroma")
-default_gateway: str = os.getenv("DEFAULT_GATEWAY", EnumDefaultGateway.DUCKDB)
+default_gateway: str = os.getenv("DEFAULT_GATEWAY", EnumGateway.DUCKDB)
 
 gateways = {}
 
 # Setup gateways
-# For each gateway, first check if a key environment variable is set.
-# If the host is set, all other environment variables for that gateway must also be set or an error will be logged.
+# For each gateway, first check if it is enabled.
+# This avoids reading in env variables that may not exist or looking for libraries that are not installed
 
+enabled_gateways = [
+    i.strip().lower() for i in os.getenv("ENABLED_GATEWAYS", "duckdb").split(",")
+]
+
+# Make sure default gateway is in enabled
+assert default_gateway in enabled_gateways, AssertionError(
+    f"Default gateway set to {default_gateway} but not in enabled in {enabled_gateways}. Check your environment variables."
+)
 
 # Local duckdb
-if os.getenv("DUCKDB_DATABASE"):
+if EnumGateway.DUCKDB in enabled_gateways:
     try:
         database = str(Path(os.environ["DUCKDB_DATABASE"]).resolve())
         state_database = str(Path(os.environ["DUCKDB_STATE_DATABASE"]).resolve())
@@ -81,7 +89,7 @@ if os.getenv("DUCKDB_DATABASE"):
         )
 
 # Databricks
-if os.getenv("DATABRICKS_SERVER_HOSTNAME"):
+if EnumGateway.DATABRICKS in enabled_gateways:
     try:
         gateway_databricks = GatewayConfig(
             connection=DatabricksConnectionConfig(
@@ -110,7 +118,7 @@ if os.getenv("DATABRICKS_SERVER_HOSTNAME"):
 
 
 # MSSQL
-if os.getenv("MSSQL_HOST"):
+if EnumGateway.MSSQL in enabled_gateways:
     try:
         gateway_mssql = GatewayConfig(
             connection=MSSQLConnectionConfig(
@@ -194,11 +202,11 @@ class OMOPSettings(BaseModel):
     @computed_field
     @property
     def catalog_src(self) -> str:
-        if default_gateway == EnumDefaultGateway.DATABRICKS:
+        if default_gateway == EnumGateway.DATABRICKS:
             return os.getenv("DATABRICKS_CATALOG_SOURCE")
-        elif default_gateway == EnumDefaultGateway.MSSQL:
+        elif default_gateway == EnumGateway.MSSQL:
             return os.getenv("MSSQL_DATABASE_SOURCE")
-        elif default_gateway == EnumDefaultGateway.DUCKDB:
+        elif default_gateway == EnumGateway.DUCKDB:
             return Path(os.getenv("DUCKDB_DATABASE")).stem
 
 
