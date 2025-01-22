@@ -6,15 +6,10 @@ build-backend = "setuptools.build_meta"
 name = "stroma"
 description = "Scalable Transpiling Reproducible OMOP Medallion Architecture"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 license = { file = "LICENSE" }
 authors = [{ name = "vvcb" }]
-dependencies = [
-    "pydantic-settings",
-    "python-dotenv",
-    "graphviz",
-    "sqlmesh[web,github]",
-]
+dependencies = ["python-dotenv", "sqlmesh[github,web]>=0.149.0"]
 dynamic = ["version"]
 
 [tool.setuptools]
@@ -28,13 +23,16 @@ Homepage = "https://github.com/lsc-sde/stroma"
 # Documentation = "https://lsc-sde.github.io/stroma/"
 
 [project.optional-dependencies]
-
-mssql = ["sqlmesh[mssql]"]
-
-databricks = ["sqlmesh[databricks,postgres]"]
+databricks = [
+    "sqlmesh[databricks,postgres]>=0.149.0",
+]
+mssql = [
+    "sqlmesh[mssql]>=0.149.0",
+]
 
 [dependency-groups]
 dev = [
+    "jupyterlab>=4.3.4",
     "mkdocs>=1.6.1",
     "mkdocstrings>=0.27.0",
     "mkdocstrings-python>=1.12.2",

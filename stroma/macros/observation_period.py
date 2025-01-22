@@ -1,6 +1,6 @@
-from sqlmesh import macro, SQL, ExecutionContext
+from sqlmesh import macro
 import sqlglot.expressions as exp
-from sqlglot import select, condition, case
+from sqlglot import condition, case
 
 
 @macro()
@@ -10,7 +10,6 @@ def get_observation_period_unified(
     start_date: exp.Column,
     end_date: exp.Column,
 ) -> str:
-
     minimum_observation_period_start_date = evaluator.var(
         "minimum_observation_period_start_date"
     )
@@ -104,7 +103,6 @@ def get_observation_period(
     start_date: exp.Column,
     end_date: exp.Column,
 ) -> str:
-
     minimum_observation_period_start_date = evaluator.var(
         "minimum_observation_period_start_date"
     )
@@ -149,7 +147,6 @@ def get_observation_period_alternative(
     start_date: exp.Column,
     end_date: exp.Column,
 ):
-
     exp.Condition()
     cond_1: exp.Case = (
         case()
@@ -174,6 +171,6 @@ def get_observation_period_alternative(
         .as_("observation_period_end_date")
     )
 
-    subquery1 = select("person_id", cond_1, cond_2).from_(model).distinct()
+    # subquery1 = select("person_id", cond_1, cond_2).from_(model).distinct()
 
     return cond_1, cond_2

@@ -1,3 +1,4 @@
 {
     "editor.suggest.showKeywords": false,
+    "python.defaultInterpreterPath": "./.venv/Scripts/python.exe"
 }

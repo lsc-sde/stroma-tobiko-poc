@@ -48,5 +48,3 @@ SELECT
   co.condition_source_concept_id,
   co.condition_status_source_value
 FROM @catalog_src.@base.condition_occurrence AS co
-WHERE
-  co.condition_start_date >= '2010-01-01'

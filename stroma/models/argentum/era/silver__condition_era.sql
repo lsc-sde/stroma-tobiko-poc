@@ -15,13 +15,15 @@ WITH cteconditiontarget /* Depending on the needs of your data, you can put more
     co.person_id,
     co.condition_concept_id,
     co.condition_start_date,
-    coalesce(nullif(co.condition_end_date, NULL), condition_start_date + INTERVAL 1 DAY) AS condition_end_date
+    coalesce(nullif(co.condition_end_date, NULL), condition_start_date + INTERVAL '1' DAY) AS condition_end_date
   FROM @schema.condition_occurrence AS co
 ), cteenddates AS (
   SELECT
     person_id,
     condition_concept_id,
-    event_date + INTERVAL (-30) DAY AS end_date /* unpad the end date */
+    event_date + INTERVAL (
+      -30
+    ) DAY AS end_date /* unpad the end date */
   FROM (
     SELECT
       person_id,
@@ -44,7 +46,7 @@ WITH cteconditiontarget /* Depending on the needs of your data, you can put more
       SELECT
         person_id,
         condition_concept_id,
-        condition_end_date + INTERVAL 30 DAY AS event_date,
+        condition_end_date + INTERVAL '30' DAY AS event_date,
         1 AS event_type,
         NULL
       FROM cteconditiontarget

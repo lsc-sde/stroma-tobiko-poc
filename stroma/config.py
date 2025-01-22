@@ -149,7 +149,11 @@ class SQLMeshSettings(BaseModel):
 
     project: str
     model_defaults: ModelDefaultsConfig = ModelDefaultsConfig(
-        kind=ModelKindName.VIEW, dialect="duckdb", cron="@daily", owner="LTH DST"
+        kind=ModelKindName.VIEW,
+        dialect="duckdb",
+        cron="@daily",
+        owner="LTH DST",
+        start="2024-01-01",
     )
     gateways: Dict[str, GatewayConfig] = gateways
     default_gateway: str = default_gateway
