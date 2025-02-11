@@ -1,14 +1,19 @@
 name: SQLMesh Deployment to Dev
 
 on:
-  push:
-    branches:
-      - develop
+  workflow_call:
+    inputs:
+     environment:
+        required: false
+        type: string
+     vm-image:
+        required: true
+        type: string
 
 jobs:
-  deploy:
-    name: SQLMesh Actions Workflow
-    runs-on: ubuntu-latest
+  Deploy-SQLMesh:
+    runs-on: ${{ inputs.vm-image }}
+    environment: ${{ inputs.environment}}
 
     steps:
       # Step 1: Checkout the repository code
@@ -21,7 +26,7 @@ jobs:
         with:
           python-version: 3.8
 
-      # Step 3: Install SQLMesh with `cicd` and `databricks` dependencies
+      # Step 3: Install SQLMesh with `databricks` dependencies
       - name: Install SQLMesh
         run: |
           pip install sqlmesh[databricks]
@@ -33,19 +38,19 @@ jobs:
           echo "DATABRICKS_TOKEN=${{ secrets.DATABRICKS_TOKEN }}" >> $GITHUB_ENV
           echo "SQLMESH_DEFAULT_GATEWAY=databricks" >> $GITHUB_ENV
 
-      # Step 5: Run `sqlmesh plan` and `sqlmesh apply` for the Dev environment
+      # Step 5: Run `sqlmesh plan` and `sqlmesh apply` for the environment
       - name: Run SQLMesh Plan & Apply
         run: |
           sqlmesh plan
           sqlmesh apply
 
-      # Step 6: Run SQLMesh models in the Dev environment
-      - name: Run SQLMesh Models in Dev
+      # Step 6: Run SQLMesh models in the environment
+      - name: Run SQLMesh Models
         run: |
-          sqlmesh run --environment dev
+          sqlmesh run --environment ${{ inputs.environment }}
 
-      # Step 7: Optionally, notify or deploy results (e.g., to a monitoring system or Slack)
+      # Step 7: Notify results
       - name: Notify Deployment Status
         run: |
-          echo "Deployment to Dev completed successfully!"
+          echo "Deployment to ${{ inputs.environment }} completed successfully!"
 
