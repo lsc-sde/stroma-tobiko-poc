@@ -1,43 +1,51 @@
-name: SQLMesh Bot
-run-name: 🚀SQLMesh Bot 🚀
+name: SQLMesh Deployment to Dev
+
 on:
-  pull_request:
-    types:
-    - synchronize
-    - opened
-   # Required if using required approvers to automate deployments
-  pull_request_review:
-    types:
-    - edited
-    - submitted
-    - dismissed
-# The latest commit is the one that will be used to create the PR environment and deploy to production
-concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
-  cancel-in-progress: true
+  push:
+    branches:
+      - develop
+
 jobs:
-  sqlmesh:
+  deploy:
     name: SQLMesh Actions Workflow
     runs-on: ubuntu-latest
-    permissions:
-      # Required to access code in PR
-      contents: write
-      # Required to post comments
-      issues: write
-      # Required to update check runs
-      checks: write
-      # Required to merge
-      pull-requests: write
+
     steps:
-      - name: Setup Python
-        uses: actions/setup-python@v4
-      - name: Checkout PR branch
+      # Step 1: Checkout the repository code
+      - name: Checkout Repository
         uses: actions/checkout@v4
+
+      # Step 2: Set up Python environment
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v4
         with:
-          ref: refs/pull/${{ github.event.issue.pull_request && github.event.issue.number || github.event.pull_request.number  }}/merge
-      - name: Install SQLMesh + Dependencies
-        run: pip install -r requirements.txt
-        shell: bash
-      - name: Run CI/CD Bot
+          python-version: 3.8
+
+      # Step 3: Install SQLMesh with `cicd` and `databricks` dependencies
+      - name: Install SQLMesh
         run: |
-          sqlmesh_cicd -p ${{ github.workspace }} github --token ${{ secrets.GITHUB_TOKEN }} run-all
+          pip install sqlmesh[databricks]
+
+      # Step 4: Set up Databricks environment variables (using GitHub Secrets)
+      - name: Set up Databricks Environment Variables
+        run: |
+          echo "DATABRICKS_HOST=${{ secrets.DATABRICKS_HOST }}" >> $GITHUB_ENV
+          echo "DATABRICKS_TOKEN=${{ secrets.DATABRICKS_TOKEN }}" >> $GITHUB_ENV
+          echo "SQLMESH_DEFAULT_GATEWAY=databricks" >> $GITHUB_ENV
+
+      # Step 5: Run `sqlmesh plan` and `sqlmesh apply` for the Dev environment
+      - name: Run SQLMesh Plan & Apply
+        run: |
+          sqlmesh plan
+          sqlmesh apply
+
+      # Step 6: Run SQLMesh models in the Dev environment
+      - name: Run SQLMesh Models in Dev
+        run: |
+          sqlmesh run --environment dev
+
+      # Step 7: Optionally, notify or deploy results (e.g., to a monitoring system or Slack)
+      - name: Notify Deployment Status
+        run: |
+          echo "Deployment to Dev completed successfully!"
+
