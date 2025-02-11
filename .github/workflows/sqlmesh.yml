@@ -1,0 +1,26 @@
+name: SQLMesh Workflow
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'feature/cicd/*'
+      - 'develop'
+      
+jobs:
+  Deploy-SQLMesh-Dev: 
+    uses: ./.github/workflows/sqlmesh-deploy.yml
+    name: Deploy SQLMesh Dev
+    secrets: inherit
+    with: 
+      vm-image: dev-vm-01
+      environment: Dev
+
+  Deploy-SQLMesh-Prod: 
+    uses: ./.github/workflows/sqlmesh-deploy.yml
+    needs: Deploy-SQLMesh-Dev
+    name: Deploy SQLMesh Prod
+    if: contains(github.ref, 'release/')
+    secrets: inherit
+    with: 
+      vm-image: prod-vm-01
+      environment: Prod
