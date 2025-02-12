@@ -26,7 +26,6 @@ load_dotenv(find_dotenv(), override=True)
 # SQLMESH CONFIGURATION
 ###############################################################################
 
-
 class EnumGateway(str, Enum):
     """
     Enumeration class representing the default gateway options.
