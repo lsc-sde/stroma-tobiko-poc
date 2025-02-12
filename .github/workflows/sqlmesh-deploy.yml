@@ -23,46 +23,40 @@ jobs:
       SQLMESH__DEFAULT_GATEWAY: "databricks"
 
     steps:
-      # Step 1: Checkout the repository code
+      # Checkout the repository code
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # Step 2: Set up Python environment
+      # Set up Python environment
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: 3.9
 
-      # Step 3: Install SQLMesh with `databricks` dependencies
+      # Install SQLMesh
       - name: Install SQLMesh
         run: |
           pip install sqlmesh[databricks,postgres]
 
-      # Step 3: Install SQLMesh with `databricks` dependencies
+      # Run SQLMesh
       - name: Run CI/CD Bot
         run: |
           sqlmesh_cicd -p ${{ github.workspace }} github --token ${{ secrets.GITHUB_TOKEN }} run-all
 
-      # Step 4: Set up Databricks environment variables (using GitHub Secrets)
+      # Set up Databricks environment variables (using GitHub Secrets)
       - name: Set up Databricks Environment Variables
         run: |
           echo "DATABRICKS_HOST=${{ secrets.DATABRICKS_HOST }}" >> $GITHUB_ENV
           echo "DATABRICKS_TOKEN=${{ secrets.DATABRICKS_TOKEN }}" >> $GITHUB_ENV
           echo "SQLMESH_DEFAULT_GATEWAY=databricks" >> $GITHUB_ENV
 
-      # Step 5: Run `sqlmesh plan` and `sqlmesh apply` for the environment
+      # Run `sqlmesh plan` and `sqlmesh apply` for the environment
       - name: Run SQLMesh Plan & Apply
         run: |
           sqlmesh plan --environment ${{ inputs.environment }}
           sqlmesh apply --environment ${{ inputs.environment }}
 
-      # Step 6: Run SQLMesh models in the environment
+      # Run SQLMesh models in the environment
       - name: Run SQLMesh Models
         run: |
           sqlmesh run --environment ${{ inputs.environment }}
-
-      # Step 7: Notify results
-      - name: Notify Deployment Status
-        run: |
-          echo "Deployment to ${{ inputs.environment }} completed successfully!"
-
