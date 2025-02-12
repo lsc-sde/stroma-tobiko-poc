@@ -41,8 +41,8 @@ jobs:
       # Step 5: Run `sqlmesh plan` and `sqlmesh apply` for the environment
       - name: Run SQLMesh Plan & Apply
         run: |
-          sqlmesh plan
-          sqlmesh apply
+          sqlmesh plan --environment ${{ inputs.environment }}
+          sqlmesh apply --environment ${{ inputs.environment }}
 
       # Step 6: Run SQLMesh models in the environment
       - name: Run SQLMesh Models
