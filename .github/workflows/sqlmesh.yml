@@ -6,7 +6,7 @@ on:
       - 'develop'
       - 'feature/cicd/'
     paths:
-      - /**  
+      - stroma/**  
       
 jobs:
   Deploy-SQLMesh-Dev: 
