@@ -1,5 +1,5 @@
 from dotenv import find_dotenv, load_dotenv
-
+ 
 import os
 import logging
 from pathlib import Path
@@ -25,7 +25,6 @@ load_dotenv(find_dotenv(), override=True)
 ###############################################################################
 # SQLMESH CONFIGURATION
 ###############################################################################
-
 
 class EnumGateway(str, Enum):
     """
