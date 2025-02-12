@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'develop'
+      - 'feature/cicd/'
       
 jobs:
   Deploy-SQLMesh-Dev: 
