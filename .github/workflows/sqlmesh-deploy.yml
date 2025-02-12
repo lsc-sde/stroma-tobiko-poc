@@ -1,4 +1,4 @@
-name: SQLMesh Deployment to Dev
+name: SQLMesh Deployment
 
 on:
   workflow_call:
