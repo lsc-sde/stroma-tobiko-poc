@@ -5,6 +5,8 @@ on:
     branches:
       - 'develop'
       - 'feature/cicd/'
+    paths:
+      - /**  
       
 jobs:
   Deploy-SQLMesh-Dev: 
