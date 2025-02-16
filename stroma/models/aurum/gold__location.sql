@@ -22,7 +22,7 @@ MODEL (
 );
 
 SELECT
-  l.location_id::INT,
+  l.location_id::BIGINT,
   l.address_1::TEXT,
   l.address_2::TEXT,
   l.city::TEXT,
@@ -30,7 +30,7 @@ SELECT
   l.zip::TEXT,
   l.county::TEXT,
   l.location_source_value::TEXT,
-  l.country_concept_id::INT,
+  l.country_concept_id::BIGINT,
   l.country_source_value::TEXT,
   l.latitude::REAL,
   l.longitude::REAL
