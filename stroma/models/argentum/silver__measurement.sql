@@ -2,7 +2,7 @@ MODEL (
   name silver.measurement,
   kind FULL,
   cron '@monthly',
-  grain unique_key,
+  grain measurement_id,
   references (
     person_id,
     measurement_concept_id AS concept_id,

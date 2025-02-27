@@ -2,6 +2,7 @@ MODEL (
   name silver.episode,
   kind FULL,
   cron '@monthly',
+  grain episode_id,
   references (
     person_id,
     episode_concept_id AS concept_id,
