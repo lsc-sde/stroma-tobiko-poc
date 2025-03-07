@@ -1,25 +1,11 @@
-site_name: Stroma Material Documentation
-site_url: https://sitename.example
-theme:
-  name: material
-  font:
-    text: Merriweather Sans
-    code: Red Hat Mono
+site_name: STROMA Documentation guide
+theme: 
+  name: material 
   features:
-    - navigation.footer
-  palette:
-    # Dark Mode
-    - scheme: slate
-      toggle:
-        icon: material/weather-sunny
-        name: Dark mode
-      primary: green
-      accent: deep purple
-
-    # Light Mode
-    - scheme: default
-      toggle:
-        icon: material/weather-night
-        name: Light mode
-      primary: blue
-      accent: deep orange
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+nav:
+  - About STROMA : "index.md"
+  - STROMA Archiecture : "Medallion-Archiecture.md" 
+  - SqlMesh Setup & Config: "Sqlmeshworkflow.md"
