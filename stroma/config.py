@@ -91,6 +91,7 @@ if EnumGateway.DUCKDB in enabled_gateways:
         )
 
 # TODO: main connection to update
+# TODO: this will contain the same information in your databricks gateway but with a different catalog to avoid conflicts
 if EnumGateway.TOBIKO_CLOUD in enabled_gateways:
     try:
         gateway_tobiko_cloud = GatewayConfig(
@@ -222,7 +223,8 @@ class OMOPSettings(BaseModel):
             return os.getenv("MSSQL_DATABASE_SOURCE")
         elif default_gateway == EnumGateway.DUCKDB:
             return Path(os.getenv("DUCKDB_DATABASE")).stem
-
+        elif default_gateway == EnumGateway.TOBIKO_CLOUD:
+            return Path(os.getenv("TOBIKO_CLOUD_DATABASE")).stem
 
 variables = OMOPSettings().model_dump(mode="json") 
 
