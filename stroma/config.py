@@ -2,7 +2,8 @@ import os
 from dotenv import find_dotenv, load_dotenv
  
 import logging
-from pathlib import Path   
+from pathlib import Path
+from tobikodata.sqlmesh_enterprise.config.scheduler import RemoteCloudSchedulerConfig
 from sqlmesh.core.config import Config, AutoCategorizationMode, CategorizerConfig
 from sqlmesh.integrations.github.cicd.config import GithubCICDBotConfig, MergeMethod
 
@@ -40,6 +41,7 @@ class EnumGateway(str, Enum):
     DATABRICKS = "databricks"
     MSSQL = "mssql"
     DUCKDB = "duckdb"
+    TOBIKO_CLOUD = "tobiko_cloud"
 
 
 class EnumMedallionLayer(str, Enum):
@@ -52,7 +54,7 @@ class EnumMedallionLayer(str, Enum):
 
 
 state_schema: str = os.getenv("STATE_SCHEMA", "stroma")
-default_gateway: str = os.getenv("DEFAULT_GATEWAY", EnumGateway.DUCKDB)
+default_gateway: str = os.getenv("DEFAULT_GATEWAY", EnumGateway.DUCKDB) # TODO: export DEFAULT_GATEWAY='tobiko_cloud'
 
 gateways = {}
 
@@ -86,6 +88,18 @@ if EnumGateway.DUCKDB in enabled_gateways:
     except Exception as e:
         logging.error(
             f"Error setting up DuckDb gateway.  Ensure all environment variables are set correctly. {e}"
+        )
+
+# TODO: main connection to update
+if EnumGateway.TOBIKO_CLOUD in enabled_gateways:
+    try:
+        gateway_tobiko_cloud = GatewayConfig(
+            scheduler = RemoteCloudSchedulerConfig(),
+        )
+        gateways["tobiko_cloud"] = gateway_tobiko_cloud
+    except Exception as e:
+        logging.error(
+            f"Error setting up Tobiko Cloud gateway. Ensure all environment variables are set correctly. {e}"
         )
 
 # Databricks
@@ -158,7 +172,7 @@ class SQLMeshSettings(BaseModel):
     project: str
     model_defaults: ModelDefaultsConfig = ModelDefaultsConfig(
         kind=ModelKindName.VIEW,
-        dialect="duckdb",
+        dialect="databricks",
         cron="@daily",
         owner="LTH DST",
         start="2024-01-01",
