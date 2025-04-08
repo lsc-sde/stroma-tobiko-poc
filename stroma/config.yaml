@@ -1,0 +1,24 @@
+# this configuration will look similar to the native Tobiko Cloud scheduler 
+# but will leverage your hybrid runners instead of Tobiko Cloud's compute
+gateways:
+  tcloud_gateway:
+    scheduler:
+      type: cloud
+      default_catalog: tcloud_pov
+
+default_gateway: tcloud_gateway
+
+model_defaults:
+  dialect: databricks
+  start: 2024-01-01
+  cron: "@daily"
+  owner: "LTH DST"
+  kind: VIEW
+
+format:
+  append_newline: true
+  normalize: true
+  indent: 2
+  normalize_functions: lower
+  leading_comma: false
+  max_text_width: 80
