@@ -5,12 +5,17 @@ gateways:
     scheduler:
       type: cloud
       default_catalog: rde_development
+    variables:
+      catalog_src: catalog_src_placeholder # TODO: replace with actual catalog
+      base: base
+      global_start_date: '2005-01-01'
+      minimum_observation_period_start_date: '2005-01-01'
 
 default_gateway: databricks
 
 model_defaults:
   dialect: databricks
-  start: 2024-01-01
+  start: '2005-01-01'
   cron: "@daily"
   owner: "LTH DST"
   kind: VIEW
