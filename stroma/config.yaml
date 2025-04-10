@@ -1,0 +1,31 @@
+# this configuration will look similar to the native Tobiko Cloud scheduler 
+# but will leverage your hybrid runners instead of Tobiko Cloud's compute
+gateways:
+  databricks:
+    scheduler:
+      type: cloud
+      default_catalog: rde_development
+
+default_gateway: databricks
+
+model_defaults:
+  dialect: databricks
+  start: 2024-01-01
+  cron: "@daily"
+  owner: "LTH DST"
+  kind: VIEW
+
+format:
+  append_newline: true
+  normalize: true
+  indent: 2
+  normalize_functions: lower
+  leading_comma: false
+  max_text_width: 80
+
+linter:
+  enabled: true
+  # error if ["ambiguousorinvalidcolumn", "invalidselectstarexpansion"] rules violated
+  rules: ["ambiguousorinvalidcolumn", "invalidselectstarexpansion"]
+  # warn_rules: ["noselectstar"]
+  # ignored_rules: ["noselectstar"]
