@@ -1,0 +1,13 @@
+global:
+  cloud:
+    clientId: "fd4c834f-12fa-4c67-8438-49dedc2b2540"  # Not a secret
+    clientSecret: "***"  # Treated as a secret
+  sqlmesh:
+    gateways:
+      databricks:
+        connection:
+          type: databricks          # Not a secret
+          server_hostname: "adb-373128615800175.15.azuredatabricks.net"      # Not a secret
+          http_path: "/sql/1.0/warehouses/4f4e66bc9587aff1"    # Treated as a secret
+          access_token: "dapi***"
+          catalog: "rde_development"
