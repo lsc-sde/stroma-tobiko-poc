@@ -1,0 +1,6 @@
+projects:
+    lthtr:
+        url: https://cloud.tobikodata.com/sqlmesh/lthtr/lthtr/
+        gateway: databricks
+        extras: databricks,web,github
+default_project: lthtr
