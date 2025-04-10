@@ -5,7 +5,7 @@ gateways:
     scheduler:
       type: cloud
       default_catalog: rde_development
-    variables:
+    variables: # these are variables in your original config.py file
       catalog_src: catalog_src_placeholder # TODO: replace with actual catalog
       base: base
       global_start_date: '2005-01-01'
@@ -28,6 +28,7 @@ format:
   leading_comma: false
   max_text_width: 80
 
+# gives you prevention guardrails to catch issues before you run your models in databricks
 linter:
   enabled: true
   # error if ["ambiguousorinvalidcolumn", "invalidselectstarexpansion"] rules violated
