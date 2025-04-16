@@ -1,0 +1,61 @@
+name: Tobiko Cloud CI/CD Bot
+run-name: 🧃 Tobiko Cloud CI/CD Bot 🧃
+
+on:
+  pull_request:
+    types:
+    - synchronize
+    - opened
+  # Required if using comments to issue commands to the bot
+  issue_comment:
+    types:
+    - created
+  # Required if using required approvers to automate deployments
+  pull_request_review:
+    types:
+    - edited
+    - submitted
+    - dismissed
+
+# The latest commit is the one that will be used to create the PR environment and deploy to production
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+jobs:
+  sqlmesh:
+    name: SQLMesh Actions
+    runs-on: ubuntu-latest
+    permissions:
+      # Required to access code in PR
+      contents: write
+      # Required to post comments
+      issues: write
+      # Required to update check runs
+      checks: write
+      # Required to merge
+      pull-requests: write
+    steps:
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+        with:
+          ref: refs/pull/${{ github.event.issue.pull_request && github.event.issue.number || github.event.pull_request.number  }}/merge
+
+      - name: Install tcloud CLI + Dependencies
+        run: |
+          pip install tcloud==2.9.3
+        shell: bash
+
+      - name: Run tcloud CI/CD Bot 
+        run: |
+          tcloud sqlmesh_cicd -p ${{ github.workspace }} github --token ${{ secrets.GITHUB_TOKEN }} run-all
+        env: # TODO: update your GitHub secrets to include TCLOUD_CLIENT_ID, TCLOUD_CLIENT_SECRET
+          TCLOUD_CLIENT_ID: ${{ secrets.TCLOUD_CLIENT_ID }}
+          TCLOUD_CLIENT_SECRET: ${{ secrets.TCLOUD_CLIENT_SECRET }}
+          TCLOUD_URL: https://cloud.tobikodata.com/sqlmesh/lthtr/lthtr/ # update with your unique URL
+          TCLOUD_GATEWAY: databricks # update with your gateway name
+          TCLOUD_EXTRAS: databricks,github # update for your query engines
