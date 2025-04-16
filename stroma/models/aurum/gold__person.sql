@@ -56,4 +56,4 @@ SELECT
   p.race_source_concept_id::BIGINT,
   p.ethnicity_source_value::TEXT,
   p.ethnicity_source_concept_id::BIGINT
-FROM stg_gold.stg__person AS p
+FROM silver.person AS p

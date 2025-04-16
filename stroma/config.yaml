@@ -5,12 +5,17 @@ gateways:
     scheduler:
       type: cloud
       default_catalog: rde_development
+    variables: # these are variables in your original config.py file
+      catalog_src: dbw-lsc-uks-dataprd-dlz-01 # TODO: replace with actual catalog
+      base: lth_omop
+      global_start_date: '2005-01-01'
+      minimum_observation_period_start_date: '2005-01-01'
 
 default_gateway: databricks
 
 model_defaults:
   dialect: databricks
-  start: 2024-01-01
+  start: '2005-01-01'
   cron: "@daily"
   owner: "LTH DST"
   kind: VIEW
@@ -22,3 +27,12 @@ format:
   normalize_functions: lower
   leading_comma: false
   max_text_width: 80
+
+# gives you prevention guardrails to catch issues before you run your models in databricks
+#linter:
+  #enabled: true
+  # error if ["ambiguousorinvalidcolumn", "invalidselectstarexpansion"] rules violated
+  #rules: ["ambiguousorinvalidcolumn", "invalidselectstarexpansion"]
+  # warn_rules: ["noselectstar"]
+  # ignored_rules: ["noselectstar"]
+ 
