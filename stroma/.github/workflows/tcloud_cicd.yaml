@@ -59,4 +59,4 @@ jobs:
           TCLOUD_CLIENT_SECRET: ${{ secrets.TCLOUD_CLIENT_SECRET }}
           TCLOUD_URL: https://cloud.tobikodata.com/sqlmesh/lthtr/lthtr/ # update with your unique URL
           TCLOUD_GATEWAY: databricks # update with your gateway name
-          TCLOUD_EXTRAS: databricks,github # update for your query engines
+          TCLOUD_EXTRAS: databricks,github # update for your query engines 
