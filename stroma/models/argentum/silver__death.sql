@@ -29,5 +29,6 @@ SELECT
   d.death_type_concept_id::BIGINT,
   d.cause_concept_id,
   d.cause_source_value,
-  d.cause_source_concept_id
+  d.cause_source_concept_id,
+  1 as new_column
 FROM bronze.death AS d
