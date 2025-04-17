@@ -17,7 +17,7 @@ on:
      
 jobs:
   Deploy-SQLMesh-Dev:
-    uses: ./tcloud_cicd.yaml
+    uses: ./.github/workflows/tcloud_cicd.yaml
     name: Deploy SQLMesh Dev
     secrets: inherit
     with:
@@ -25,7 +25,7 @@ jobs:
       environment: Dev
  
   Deploy-SQLMesh-Prod:
-    uses: ./tcloud_cicd.yaml
+    uses: ./.github/workflows/tcloud_cicd.yaml
     needs: Deploy-SQLMesh-Dev
     name: Deploy SQLMesh Prod
     if: contains(github.ref, 'release/')
