@@ -2,20 +2,15 @@ name: Tobiko Cloud CI/CD Bot
 run-name: 🧃 Tobiko Cloud CI/CD Bot 🧃
 
 on:
-  pull_request:
-    types:
-    - synchronize
-    - opened
-  # Required if using comments to issue commands to the bot
-  issue_comment:
-    types:
-    - created
-  # Required if using required approvers to automate deployments
-  pull_request_review:
-    types:
-    - edited
-    - submitted
-    - dismissed
+  workflow_call:
+    inputs:
+     environment:
+        required: false
+        type: string
+     vm-image:
+        required: true
+        type: string
+
 
 # The latest commit is the one that will be used to create the PR environment and deploy to production
 concurrency:
@@ -24,7 +19,7 @@ concurrency:
 jobs:
   sqlmesh:
     name: SQLMesh Actions
-    runs-on: ubuntu-latest
+    runs-on: ${{ inputs.vm-image }}
     permissions:
       # Required to access code in PR
       contents: write
@@ -34,6 +29,7 @@ jobs:
       checks: write
       # Required to merge
       pull-requests: write
+    environment: ${{ inputs.environment}}
     steps:
       - name: Setup Python
         uses: actions/setup-python@v5
