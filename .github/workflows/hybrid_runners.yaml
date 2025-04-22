@@ -21,7 +21,7 @@ jobs:
     name: Deploy SQLMesh Dev
     secrets: inherit
     with:
-      vm-image: dev-tobiko-vm-01
+      vm-image: dev-vm-001
       environment: Dev
  
   Deploy-SQLMesh-Prod:
